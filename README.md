@@ -21,6 +21,8 @@ the rules are simple, there are keychars:
 	_   null or nop
 	^   infinite loop (can be broken out of)
 	~   refer to current scope
+	,   scope accessor
+	/   comment
 	`   for-loop (takes variable and list structure and closure). early return any value to break, early return a null to continue
 
 builtins:
