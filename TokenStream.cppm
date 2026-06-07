@@ -60,7 +60,8 @@ public:
         get_while([](char c) { return std::isspace(c); });
     }
 
-    bool eof() const {
+    bool eof() {
+        trim();
         return pos >= str.size();
     }
 

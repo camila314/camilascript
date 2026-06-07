@@ -36,15 +36,18 @@ builtins:
 Here's an example:
 
 ```
-:point {
-	:x $0
-	:y $1
-	:magnitude {
-		'sqrt (($x*$x) + ($y*$y))
+'print"Enter a word: "
+:word'input
+:len'len$word
+?`i'range#0$len {
+	? !($word.$i = ($word.($len - $i - #1))) {
+		\#false
+	} {
+		#true
 	}
-	~
+} {
+	'print"Palindrome\n"
+} {
+	'print"Not palindrome\n"
 }
-
-:p1 @$point[#3#4]
-'print @,magnitude$p1[]
 ```

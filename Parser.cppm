@@ -41,7 +41,6 @@ namespace helper {
             std::visit([&](auto&& t) {
                 realtypename = typeid(decltype(t)).name();
             }, data.inner);
-            std::cout << "fail! " << data.to_string() << std::endl;
             throw Error(std::string("Expected type was ") + typeid(T).name() + " found " + realtypename, state.stream().getPos());
         }
     }
@@ -330,11 +329,11 @@ namespace parser {
     }
 
     Expression condition(State& state) {
-        auto condition = helper::parse_as<Expression::Bool>(state);
+        auto condition = parse(state);
         auto true_branch = helper::parse_as<Expression::Closure>(state);
         auto false_branch = helper::parse_as<Expression::Closure>(state);
 
-        if (condition.value) {
+        if (condition.truthy()) {
             return helper::eval_closure(state, true_branch, {});
         } else {
             return helper::eval_closure(state, false_branch, {});
